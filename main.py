@@ -1564,9 +1564,7 @@
 # with open('user_text.txt', 'r') as fil_
 
 def calc():
-  log = []
   user_num1 = int(input("Pls enter num1:"))
-  log.append(user_num1)
   sign = input("pls enter ur sin:")
   user_num2 = int(input("Pls enter num2:"))
   result = 0
