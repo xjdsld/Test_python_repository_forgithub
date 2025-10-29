@@ -1359,111 +1359,240 @@
 #     print(f"Making a {size} {flavor} coffee...")
 
 # make_coffee("large")
-# make_coffee("small", "macciato")
+# make_coffee("small", "macchiato")
 # ===============================================================================================
 
-import random
+# import random
 
+# def create_deck(deck, meaning, suit):
+#   for i in suit:
+#     for j in meaning:
+#       deck.append(i + j)
+#   print(deck)
 
-def create_deck(deck, meaning, suit):
-  for i in suit:
-    for j in meaning:
-      deck.append(i + j)
+# def fill_cards_players(player, deck, count_cards):
+#   if len(deck) > 0:
+#     for i in range(count_cards):
+#       tmp_cards = random.choice(deck)
+#       player.append(tmp_cards)
+#       deck.remove(tmp_cards)
 
-def fill_cards_players(player, deck, count_cards):
-  if len(deck) > 0:
-    for i in range(count_cards):
-      tmp_cards = random.choice(deck)
-      player.append(tmp_cards)
-      deck.remove(tmp_cards)
-
-def game_order():
-  order = [0, 1, 2]
-
-def user_choice_function(user, bot, chosen_card):
-  if chosen_card in bot:
-      bot.remove(chosen_card)
-      user.append(chosen_card)
-      print("You took", chosen_card, "from bot!")
-  else:
-      print("Not a card.")
-
-
-def bot_choice_function(player, deck):
-  bot_cards = []
-  for i in range(len(player)):
-      rank1 = ""
-      for c in player[i]:
-          if c not in ['♥', '♦', '♣', '♠']:
-              rank1 = rank1 + c
-
-      for j in range(i + 1, len(player)):
-          rank2 = ""
-          for c in player[j]:
-              if c not in ['♥', '♦', '♣', '♠']:
-                  rank2 = rank2 + c
-
-          if rank1 == rank2:
-              if player[i] not in bot_cards:
-                  bot_cards.append(player[i])
-              if player[j] not in bot_cards:
-                  bot_cards.append(player[j])
-                
-  if len(bot_cards) > 0:
-    chosen_card = random.choice(bot_cards)
-    rank = ""
-    for c in chosen_card:
-        if c not in ['♥', '♦', '♣', '♠']:
-            rank += c
-    bot_suite = random.choice(['♥', '♦', '♣', '♠'])
-    bot_choice = rank + bot_suite
-    print("Bot chose", bot_choice)
-    
-    if bot_choice in user:
-      user.remove(bot_choice)
-      player.append(bot_choice)
-      print("Bot took", bot_choice, "from u!")
-    else:
-        print("Wrong guess.")
-
+# def game_order(deck, user, bot1, bot2):
+#   players = [user, bot1, bot2]
   
+#   while len(deck) > 0:
+#     first_player = random.choice(players)
+#     if first_player == user:
+#       user_choice = input("Enter the card u want: ")
+#       user_choice_function(user, bot1, "Bot1", user_choice)
+#       user_choice_function(user, bot2, "Bot2", user_choice)
+#       bot_choice_function(bot1, deck, "Bot1", user)
+#       bot_choice_function(bot1, deck, "Bot1", bot2)
+#       fill_cards_players(user, deck, standart_count_cards - len(user))
+#       fill_cards_players(bot1, deck, standart_count_cards - len(bot1))
+#       fill_cards_players(bot2, deck, standart_count_cards - len(bot2))
+#       print("Bot-1's hand", bot1)
+#       print("Bot-2's hand", bot2)
+#       print("User's hand", user)
+#     elif first_player == bot1:
+#       bot_choice_function(bot1, deck, "Bot1", user)
+#       bot_choice_function(bot1, deck, "Bot1", bot2)
+#       user_choice = input("Enter the card u want: ")
+#       user_choice_function(user, bot1, "Bot1", user_choice)
+#       user_choice_function(user, bot2, "Bot2", user_choice)
+#       fill_cards_players(user, deck, standart_count_cards - len(user))
+#       fill_cards_players(bot1, deck, standart_count_cards - len(bot1))
+#       fill_cards_players(bot2, deck, standart_count_cards - len(bot2))
+#       print("Bot-1's hand", bot1)
+#       print("Bot-2's hand", bot2)
+#       print("User's hand", user)
+#     elif first_player == bot2:
+#       bot_choice_function(bot2, deck, "Bot2", user)
+#       bot_choice_function(bot2, deck, "Bot2", bot1)
+#       user_choice = input("Enter the card u want: ")
+#       user_choice_function(user, bot1, "Bot1", user_choice)
+#       user_choice_function(user, bot2, "Bot2", user_choice)
+#       fill_cards_players(user, deck, standart_count_cards - len(user))
+#       fill_cards_players(bot1, deck, standart_count_cards - len(bot1))
+#       fill_cards_players(bot2, deck, standart_count_cards - len(bot2))
+#       print("Bot-1's hand", bot1)
+#       print("Bot-2's hand", bot2)
+#       print("User's hand", user)
+
+# def user_choice_function(user, bot, bot_name, chosen_card):
+#   user_cards = []
+#   if chosen_card in bot:
+#       bot.remove(chosen_card)
+#       user.append(chosen_card)
+#       print("You took", chosen_card, f"from {bot_name}!")
+#   else:
+#       print(f"{bot_name} does not have this card")
+#   for i in range(len(user)):
+#     meaning1 = ""
+#     for a in user[i]:
+#         if a not in ['♥', '♦', '♣', '♠']:
+#           meaning1 = meaning1 + a
+
+#     for j in range(i + 1, len(user)):
+#       meaning2 = ""
+#       for a in user[j]:
+#             if a not in ['♥', '♦', '♣', '♠']:
+#               meaning2 += a
+
+#       if meaning1 == meaning2:
+#             if user[i] not in user_cards:
+#                 user_cards.append(user[i])
+#             if user[j] not in user_cards:
+#                 user_cards.append(user[j])
+#   print(user_cards)
+#   return user_cards
+
+# def bot_choice_function(player, deck, bot_name, opponent):
+#   bot_cards = []
+#   for i in range(len(player)):
+#       meaning1 = ""
+#       for a in player[i]:
+#           if a not in ['♥', '♦', '♣', '♠']:
+#             meaning1 = a + meaning1
+
+#       for j in range(i + 1, len(player)):
+#         meaning2 = ""
+#         for a in player[j]:
+#               if a not in ['♥', '♦', '♣', '♠']:
+#                 meaning2 = a + meaning2
+
+#         if meaning1 == meaning2:
+#               if player[i] not in bot_cards:
+#                   bot_cards.append(player[i])
+#               if player[j] not in bot_cards:
+#                   bot_cards.append(player[j])
+                
+#   if len(bot_cards) > 0:
+#     chosen_card = random.choice(bot_cards)
+#     meaning = ""
+#     for a in chosen_card:
+#         if a not in ['♥', '♦', '♣', '♠']:
+#             meaning = meaning + a
+#     bot_suite = random.choice(['♥', '♦', '♣', '♠'])
+#     bot_choice = bot_suite + meaning
+#     print(f"{bot_name} chose", bot_choice)
     
+#     if bot_choice in opponent:
+#       opponent.remove(bot_choice)
+#       player.append(bot_choice)
+#       print(f"{bot_name} took", bot_choice, f"from {opponent}!")
+#     else:
+#         print(f"Wrong guess, {bot_name}.")
+#   else:
+#     if len(deck) == 0:
+#       print("The deck is empty")
+#       return bot_cards
+#     bot_choice = random.choice(deck)
+#     print(bot_choice)
+#     if bot_choice in opponent:
+#       opponent.remove(bot_choice)
+#       player.append(bot_choice)
+#       print(f"{bot_name} took", bot_choice, "from u!")
+#     else:
+#         print(f"Wrong guess, {bot_name}.")
+#   return bot_cards
+    
+# def winner(user_cards, bot_cards, deck):
+#   if len(user_cards) < len(bot_cards) and len(deck) == 0:
+#     print("User won!")
+#   elif len(bot_cards) < len(user_cards) and len(deck) == 0:
+#     print("User won!")
 
-meaning = ['6', '7', '8', '9', '10', 'B', 'Д', 'К', 'Т']
-suit = ['♥', '♦', '♣', '♠']
+# meaning = ['6', '7', '8', '9', '10', 'B', 'Д', 'К', 'Т']
+# suit = ['♥', '♦', '♣', '♠']
+
+# deck = []
+
+# user = []
+# bot1 = []
+# bot2 = []
+# bot3 = []
+
+# standart_count_cards = 4
+
+# create_deck(deck, meaning, suit)
 
 
-deck = []
-table = []
+# fill_cards_players(user, deck, standart_count_cards)
+# fill_cards_players(bot1, deck, standart_count_cards)
+# fill_cards_players(bot2, deck, standart_count_cards)
 
-user = []
-bot1 = []
-bot2 = []
-bot3 = []
+# while len(deck) > 0:
+#     game_order(deck, user, bot1, bot2)
+# winner(user, [bot1, bot2], deck)
 
-standart_count_cards = 4
+# file = open('t.txt', 'r' )
+# text_file = file.read()
+# print(text_file)
+# file.close()
 
-create_deck(deck, meaning, suit)
+# with open('t.txt', 'r') as file:
+#     text_file = file.read()
+#     print(text_file)
 
-random.shuffle(deck)
+# file = open('t.txt', 'w' )
+# file.write("Hello World")
+# file.write("\nHello World")
+# file.write("\nHello World")
+# file.write("\nHello World")
+# file.close()
+
+# with open('t.txt', 'w') as file:
+#     file.write('Hello World1')
+#     file.write('\nHello World1')
+#
+# with open('t.txt', 'w') as file:
+#     file.write('Hello World2')
+#     file.write('\nHello World2')
 
 
-fill_cards_players(user, deck, standart_count_cards)
-fill_cards_players(bot1, deck, standart_count_cards)
-fill_cards_players(bot2, deck, standart_count_cards)
-fill_cards_players(bot3, deck, standart_count_cards)
+# with open('t.txt', 'a') as file:
+#     file.write('Hello World1')
+#     file.write('\nHello World1')
+
+# while True:
+#   user_input = input("Pls enter ur text:")
+#   with open('user_text.txt', 'a') as file:
+#       file.write(user_input)
+#   if "stop" in user_input:
+#     break
+# with open('user_text.txt', 'r') as fil_
+
+def calc():
+  log = []
+  user_num1 = int(input("Pls enter num1:"))
+  log.append(user_num1)
+  sign = input("pls enter ur sin:")
+  user_num2 = int(input("Pls enter num2:"))
+  result = 0
+  if sign == '-':
+    result = user_num1 - user_num2
+  elif sign == '+':
+    result = user_num1 + user_num2
+  elif sign == '/':
+    result = user_num1 / user_num2
+  elif sign == '*':
+    result = user_num1 * user_num2
+  else:
+    "No"
+  print(result)
+  result = (f"{user_num1} {sign} {user_num2} = {result}")
+  return result
 
 while True:
-  print('user:', user)
-  user_choice = input("Enter the card u want: ")
-  user_choice_function(user, bot1, user_choice)
-  user_choice_function(user, bot2, user_choice)
-  fill_cards_players(user, deck, standart_count_cards - len(user))
-  fill_cards_players(bot1, deck, standart_count_cards - len(bot1))
-  fill_cards_players(bot2, deck, standart_count_cards - len(bot2))
-  fill_cards_players(bot3, deck, standart_count_cards - len(bot3))
-  bot_choice_function(bot1, deck)
-  bot_choice_function(bot2, deck)
+  log = calc()
+  with open('log.txt', 'a') as file:
+    file.write(log)
+  with open('log.txt', 'r') as file:
+    log = file.read()
+    print(log)  
+    
+  
 
 
 
