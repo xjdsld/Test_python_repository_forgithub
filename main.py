@@ -2512,29 +2512,28 @@ welcome_word = "Welcome to the random password generator. You can select the len
 print(welcome_word)
 
 
-symbols = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
- ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
-alphabet = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-]
-numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = '!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+
+alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+numbers = "0123456789"
 
 user_lenght = int(input("Please select the lenght of your password:"))
 user_choice = (input("Please select one: symbols - 'S', letters - 'L', numbers - 'N', or combination of them all - 'C':")).lower()
-result = []
-for i in range(user_lenght):
-    result.append(i) 
+password = ''
+pass_char = ''
 
 if user_choice == 's':
-  result = random.choice(symbols)
+  pass_char = symbols
 elif user_choice == 'l':
-  result = random.choice(alphabet) * user_lenght
+  pass_char = alphabet
 elif user_choice == 'n':
-  result = random.choice(numbers) * user_lenght
+  pass_char = numbers
 elif user_choice == 'c':
-  result = random.choice(symbols and numbers and alphabet) * user_lenght
+  pass_char = symbols + alphabet + numbers
 
-print(result)
+for i in range(user_lenght):
+    password += random.choice(pass_char)
+
+
+print(password)
