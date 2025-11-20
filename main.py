@@ -2518,11 +2518,11 @@ alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 numbers = "0123456789"
 
-user_lenght = int(input("Please select the lenght of your password:"))
-user_choice = (input("Please select one: symbols - 'S', letters - 'L', numbers - 'N', or combination of them all - 'C':")).lower()
-password = ''
-pass_char = ''
 try:
+    user_lenght = int(input("Please select the lenght of your password:"))
+    user_choice = (input("Please select one: symbols - 'S', letters - 'L', numbers - 'N', or combination of them all - 'C':")).lower()
+    password = ''
+    pass_char = ''
     if user_choice == 's':
       pass_char = symbols
     elif user_choice == 'l':
@@ -2534,7 +2534,7 @@ try:
     
     for i in range(user_lenght):
         password += secrets.choice(pass_char)
+        print(f"Your password is {password}")
 except ValueError:
     print("Please enter a number")
 
-print(f"Your password is {password}")
